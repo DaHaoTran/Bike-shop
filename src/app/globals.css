@@ -44,6 +44,14 @@ button {
   text-align: center;
 }
 
+footer {
+  background-color: black;
+}
+
+nav {
+  background-color: white;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: light;
