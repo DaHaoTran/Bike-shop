@@ -98,6 +98,16 @@ a.secondary {
   margin-top: 69.9px;
 }
 
+.news_container {
+  padding: 2px 0px 10px 0px;
+  margin-bottom: 100px;
+  background-color: lightgray;
+}
+
+.news_image {
+  border-radius: 10px;
+}
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
