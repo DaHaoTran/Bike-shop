@@ -1,0 +1,43 @@
+.type_container {
+    animation-name: fade_in;
+    animation-duration: 4s;
+}
+
+.type_image {
+    animation-name: slide_top;
+    animation-duration: 2s;
+}
+
+.type_background {
+    width: 170px;
+    height: 290px;
+    position: absolute;
+    margin-left: 120px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.type_name {
+    width: 75%;
+    position: relative;
+    margin-left: 160px;
+}
+
+/* animations */
+@keyframes slide_top {
+    from {
+        margin-top: 30px;
+    }
+    to {
+        margin-top: 0px;
+    }
+}
+
+@keyframes fade_in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
