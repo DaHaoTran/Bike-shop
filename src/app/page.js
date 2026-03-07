@@ -17,7 +17,7 @@ export default function Home() {
         <h1 className="my-4 text-center"><strong>Khám phá sản phẩm</strong></h1>
         <div className="row">
           {Array.from({ length: 5 }).map((_, index) => (
-            <div className="col-lg-2 col-md-6 me-lg-4" key={index}>
+            <div className="col-lg-3 col-md-6 d-flex justify-content-center" key={index}>
               <BikeType />
             </div>
           ))}
