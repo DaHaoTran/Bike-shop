@@ -33,13 +33,16 @@ export default function LayoutProvider({ children }) {
               <NavItem>
                 <NavLink className={styles.nav_link} href="/pages/reviews">Giới thiệu</NavLink>
               </NavItem>
-               <NavItem>
+              <NavItem>
                 <NavLink className={styles.nav_link} href="/">Trong tầm giá</NavLink>
               </NavItem>
-               <NavItem>
+              <NavItem>
                 <NavLink className={styles.nav_link} href="/">Tên sản phẩm</NavLink>
               </NavItem>
-               <NavItem>
+              <NavItem>
+                <NavLink className={styles.nav_link} href="#bike_types">Loại xe</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink className={styles.nav_link} href="/">Giỏ hàng</NavLink>
               </NavItem>
             </Nav>
