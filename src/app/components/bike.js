@@ -8,7 +8,7 @@ export default function Bike() {
   return (
     <div className={styles.bike_container}>
       <h3 className={styles.bike_title}><strong>Yamaha PG-1 mới phiên bản giới hạn</strong></h3>
-      <h5>Giá từ <strong>30.537.000 đồng</strong></h5>
+      <h5 style={{color: 'grey'}}>Giá từ <strong>30.537.000 đồng</strong></h5>
       <Image
         className={styles.bike_image}
         src={image}
