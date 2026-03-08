@@ -31,7 +31,7 @@ export default function LayoutProvider({ children }) {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="me-auto w-100 d-flex justify-content-center" navbar>
               <NavItem>
-                <NavLink className={styles.nav_link} href="/">Giới thiệu</NavLink>
+                <NavLink className={styles.nav_link} href="/pages/reviews">Giới thiệu</NavLink>
               </NavItem>
                <NavItem>
                 <NavLink className={styles.nav_link} href="/">Trong tầm giá</NavLink>
