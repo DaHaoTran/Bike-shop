@@ -9,7 +9,7 @@ export default function Products() {
 
     return (
         <div className={styles.products_container}>
-            <h1 className='mx-4 mb-4 fw-bold'>Kết quả tìm kiếm: {searchParams.get("str")}</h1>
+            <h1 className='mx-4 mb-4 fw-bold'>Kết quả tìm kiếm: {searchParams.get("str").includes('from') ? 'theo giá lọc': ''}</h1>
             <div className='row'>
                 {Array.from({ length: 3 }).map((_, index) => (
                     <div className='col-lg-4 col-md-6' key={index}>
