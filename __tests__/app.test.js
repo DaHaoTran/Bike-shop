@@ -27,7 +27,7 @@ describe('Layout', () => {
     var link2 = screen.getByText('Tên sản phẩm')
     fireEvent.click(link2)
     expect(screen.getByText('Lọc thương hiệu')).toBeInTheDocument();
-  }),
+  })
   // it('Check navigations', () => {
   //   const push = jest.fn();
 
