@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutProvider from "@/app/providers/layout_provider";
+import StoreProvider from "./providers/store_provider";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const geistSans = Geist({
@@ -28,7 +29,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {currentPageState == pageState[0] ? (
-          <LayoutProvider>{children}</LayoutProvider>
+          <StoreProvider>
+            <LayoutProvider>{children}</LayoutProvider>
+          </StoreProvider>
         ) : children}
       </body>
     </html>
