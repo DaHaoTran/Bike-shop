@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     async function getTypes() {
       try {
-        const res = await fetch('api/types');
+        const res = await fetch('/api/types');
         if(!res.ok) {
           route.push(`/pages/errors/${res.status}`)
           return
@@ -42,7 +42,7 @@ export default function Home() {
           <div className="row">
             {types.map((x) => (
               <div className="col-lg-3 col-md-6 d-flex justify-content-center" key={x.id}>
-                <BikeType name={x.name} />
+                <BikeType id={x.id} name={x.name} />
               </div>
             ))}
           </div>
