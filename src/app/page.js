@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     async function getTypes() {
       try {
-        const res = await fetch('api/types');
+        const res = await fetch('/api/types');
         if(!res.ok) {
           route.push(`/pages/errors/${res.status}`)
           return
