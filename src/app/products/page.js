@@ -20,6 +20,7 @@ function ProductsContent() {
         const res = await fetch(`/api/bikes/by_types?id=${id}`);
         if (!res.ok) {
           router.push(`/pages/errors/${res.status}`);
+          return
         }
         const data = await res.json();
         setBikes(data);

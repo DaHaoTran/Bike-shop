@@ -68,6 +68,16 @@ export default function LayoutProvider({ children }) {
       }
     });
   }
+  const onCartClick = async () => {
+    Swal.fire({
+      title: "Giàu nhỉ ?",
+      text: "Tớ nghĩ cậu không đủ tiền để mua nổi 1 lần 2 chiếc xe đâu !",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Vâng, đúng vậy",
+      cancelButtonText: "Không, tôi nghèo"
+    });
+  }
 
   return (
     <div>
@@ -90,7 +100,7 @@ export default function LayoutProvider({ children }) {
                 <NavLink className={styles.nav_link} href="#bike_types">Loại xe</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className={styles.nav_link} href="/">Giỏ hàng</NavLink>
+                <NavLink className={styles.nav_link} onClick={(x => onCartClick())}>Giỏ hàng</NavLink>
               </NavItem>
             </Nav>
             {/* <NavbarText>Simple Text</NavbarText> */}
