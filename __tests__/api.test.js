@@ -22,6 +22,10 @@ describe('bikes api', () => {
       const res = await fetch('/api/bikes/by_firms?id=1');
       expect(res.ok).toBe(true);
     })
+    it('get bikes by search string', async () => {
+      const res = await fetch('/api/bikes/filter?str=hi');
+      expect(res.ok).toBe(true);
+    })
 })
 
 describe('types api', () => {

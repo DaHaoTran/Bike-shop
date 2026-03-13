@@ -18,12 +18,10 @@ import {
 import { IoChatbubbleOutline } from "react-icons/io5";
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
 import { setFirmId } from '../features/firm/firmSlice';
 
 export default function LayoutProvider({ children }) {
   const router = useRouter();
-  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [firms, setFirms] = useState([]);
   const [names, setNames] = useState([]);
@@ -66,8 +64,7 @@ export default function LayoutProvider({ children }) {
         return new Promise((resolve) => {
           resolve()
           const firm = firms.find(x => x.name === value);
-          dispatch(setFirmId(firm.id))
-          router.push(`/products?str=${value}`);
+          router.push(`/products?id=${firm.id}&str=${value}`);
         });
       }
     });

@@ -8,9 +8,9 @@ const getBikes = () => JSON.parse(fs.readFileSync(filePath, "utf-8"));
 export async function GET(request) {
     try {
         const { searchParams } = new URL(request.url);
-        const id = searchParams.get("id");
+        const str = searchParams.get("str");
         const limit = searchParams.get("limit") == null ? 30 : searchParams.get("limit");
-        const bikes = getBikes().filter(x => x.firmId === id);
+        const bikes = getBikes().filter(x => str.includes(x.price.splice(0, x.price.indexOf('.'))) ||  str.includes(x.price.splice(x.price.indexOf('-') + 1, x.price.indexOf('.'))));
         if (!bikes) return NextResponse.json({ message: 'Not found' }, { status: 404 });
         return NextResponse.json(bikes.slice(0, limit));
     } catch (error) {

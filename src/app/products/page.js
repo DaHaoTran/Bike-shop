@@ -18,18 +18,37 @@ function ProductsContent() {
     async function getBikesById() {
       try {
         const res = await fetch(`/api/bikes/by_types?id=${id}`);
-        if (!res.ok) {
+        const res2 = await fetch(`/api/bikes/by_firms?id=${id}`);
+        if (!res.ok || !res2.ok) {
           router.push(`/pages/errors/${res.status}`);
           return
         }
         const data = await res.json();
-        setBikes(data);
+        const data2 = await res2.json();
+        setBikes([data, data2, ...bikes]);
       } catch (error) {
         router.push(`/pages/errors/${error.status}`);
       }
     }
     getBikesById();
   }, [id])
+
+  useEffect(() => {
+    if(!searchStr) return
+    async function getBikesByStr() {
+      try {
+        const res = await fetch(`/api/filters?str=${searchStr}`);
+        if(!res.ok) {
+          router.push(`/pages/errors/${res.status}`);
+          return
+        }
+        setBikes([data, ...bikes]);
+      } catch (error) {
+        router.push(`/pages/errors/${error.status}`);
+      }
+    }
+    getBikesByStr();
+  }, [searchStr])
 
   return (
     <div className={styles.products_container}>
