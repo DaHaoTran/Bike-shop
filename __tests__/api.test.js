@@ -22,8 +22,15 @@ describe('bikes api', () => {
       const res = await fetch('/api/bikes/by_firms?id=1');
       expect(res.ok).toBe(true);
     })
+    it('get bikes by firm id with limit', async () => {
+      const res = await fetch('/api/bikes/by_firms?id=1&limit=1');
+    })
     it('get bikes by search string', async () => {
       const res = await fetch('/api/bikes/filter?str=hi');
+      expect(res.ok).toBe(true);
+    })
+    it('get bikes by search string wih limit', async () => {
+      const res = await fetch('/api/bikes/filter?str=hi&limit=1');
       expect(res.ok).toBe(true);
     })
 })
