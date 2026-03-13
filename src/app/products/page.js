@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import Bike from '../components/bike'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import { Spinner } from 'reactstrap'
 
 function ProductsContent() {
   const searchParams = useSearchParams();
@@ -25,7 +26,9 @@ function ProductsContent() {
         }
         const data = await res.json();
         const data2 = await res2.json();
-        setBikes([data, data2, ...bikes]);
+        console.log("data", data)
+        console.log("data2", data2)
+        setBikes([...data, ...data2, ...bikes]);
       } catch (error) {
         router.push(`/pages/errors/${error.status}`);
       }
@@ -35,6 +38,7 @@ function ProductsContent() {
 
   useEffect(() => {
     if(!searchStr) return
+    if(!searchStr.includes('from')) return;
     async function getBikesByStr() {
       try {
         const res = await fetch(`/api/filters?str=${searchStr}`);
@@ -50,14 +54,15 @@ function ProductsContent() {
     getBikesByStr();
   }, [searchStr])
 
+  if(bikes.length <= 0) return <div style={{marginTop: "100px", marginLeft: "30px", fontSize: "100px"}}><Spinner color='dark' /></div>
   return (
     <div className={styles.products_container}>
       <h1 className='mx-4 mb-4 fw-bold'>
         Kết quả tìm kiếm: {searchStr && searchStr.includes('from') ? 'theo giá lọc' : searchStr}
       </h1>
       <div className='row'>
-        {bikes.map((x) => (
-          <div className='col-lg-4 col-md-6' key={x.id}>
+        {bikes.map((x, index) => (
+          <div className='col-lg-4 col-md-6' key={index}>
             <div className='d-flex justify-content-center'><Bike bike={x} /></div>
           </div>
         ))}
