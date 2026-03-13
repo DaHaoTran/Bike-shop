@@ -39,12 +39,13 @@ function ProductsContent() {
     if(!searchStr.includes('from')) return;
     async function getBikesByStr() {
       try {
-        const res = await fetch(`/api/filters?str=${searchStr}`);
+        const res = await fetch(`/api/bikes/filters?str=${searchStr}`);
         if(!res.ok) {
           router.push(`/pages/errors/${res.status}`);
           return
         }
-        setBikes([data, ...bikes]);
+        const data = await res.json();
+        setBikes([...data, ...bikes]);
       } catch (error) {
         router.push(`/pages/errors/${error.status}`);
       }
