@@ -11,7 +11,7 @@ export default function Error() {
       <div>
         <h1 className={styles.error_number_label}>{params.number}</h1>
         <div className={styles.error_button_container}>
-          <button className='px-4'>Reload</button>
+          <button className='px-4' onClick={(x => document.location.href= '/')}>Reload</button>
         </div>
       </div>
       <h5 className={styles.error_sub_title}>Something <br /> went wrong :(( <br /> ...</h5>

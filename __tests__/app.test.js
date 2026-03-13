@@ -15,17 +15,17 @@ jest.mock('next/navigation', () => ({
     }),
 }));
 
-jest.mock('react-redux', () => ({
-    useDispatch: () => ({
-        push: jest.fn(),
-        events: {
-            on: jest.fn(),
-            off: jest.fn(),
-            emit: jest.fn(),
-        },
-        isFallback: false,
-    }),
-}));
+// jest.mock('react-redux', () => ({
+//     useDispatch: () => ({
+//         push: jest.fn(),
+//         events: {
+//             on: jest.fn(),
+//             off: jest.fn(),
+//             emit: jest.fn(),
+//         },
+//         isFallback: false,
+//     }),
+// }));
 
 describe('Layout', () => {
   it('Check existing modals', () => {
