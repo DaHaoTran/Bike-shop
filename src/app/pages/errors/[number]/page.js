@@ -18,3 +18,13 @@ export default function Error() {
     </div>
   )
 }
+
+// 👇 Required for static export
+export async function generateStaticParams() {
+  // Define which error numbers you want to pre-render
+  return [
+    { number: '404' },
+    { number: '500' },
+    { number: '403' },
+  ]
+}
