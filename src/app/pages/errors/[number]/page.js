@@ -2,8 +2,8 @@ export async function generateStaticParams() {
   return [{ number: '404' }, { number: '500' }]
 }
 
-import ErrorClient from './ErrorClient'
+import Error from "../../../components/error"
 
 export default function Page({ params }) {
-  return <ErrorClient number={params.number} />
+  return <Error number={params.number} />
 }
