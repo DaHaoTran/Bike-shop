@@ -3,9 +3,15 @@ import React from 'react'
 import styles from './page.module.css'
 import { useParams, useSearchParams } from 'next/navigation'
 
-export default function Error() {
+let params;
+
+export function generateStaticParams() {
   const params = useParams()
 
+  return params;
+}
+
+export default function Error({ params }) {
   return (
     <div className={styles.error_container}>
       <div>
