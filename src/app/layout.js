@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutProvider from "@/app/providers/layout_provider";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import StoreProvider from "./providers/store_provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,11 +19,20 @@ export const metadata = {
   description: "small next web",
 };
 
+var pageState = ["opening", "error"]
+
 export default function RootLayout({ children }) {
+  var currentPageState = pageState[0]
+
+  if (currentPageState == null) return;
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <LayoutProvider>{children}</LayoutProvider>
+        {currentPageState == pageState[0] ? (
+          <StoreProvider>
+            <LayoutProvider>{children}</LayoutProvider>
+          </StoreProvider>
+        ) : children}
       </body>
     </html>
   );

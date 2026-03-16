@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './layout_provider.module.css';
 import {
   Collapse,
@@ -16,11 +16,93 @@ import {
   NavbarText,
 } from 'reactstrap';
 import { IoChatbubbleOutline } from "react-icons/io5";
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation';
+import { setFirmId } from '../features/firm/firmSlice';
 
 export default function LayoutProvider({ children }) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-
+  const [firms, setFirms] = useState([]);
+  const [names, setNames] = useState([]);
   const toggle = () => setIsOpen(!isOpen);
+
+  const onPriceSelectionClick = async () => {
+    const { value: fruit } = await Swal.fire({
+      title: "Lọc khoảng giá",
+      input: "select",
+      inputOptions: {
+        from0to50: 'Từ 0 - 50 tr',
+        from50to100: 'Từ 50 - 100 tr',
+        from100to150: 'Từ 100 - 150 tr',
+        from150to300: 'Từ 150 - 300 tr',
+        from300to450: 'Từ 300 - 450 tr',
+        from450to600: 'Từ 450 - 600 tr',
+      },
+      inputPlaceholder: "Chọn lọc giá",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value === "from0to50" || value === "from50to100") {
+            resolve();
+            router.push(`/products?str=${value}`)
+          } else {
+            resolve("Sorry, not available now !");
+          }
+        });
+      }
+    });
+  }
+  const onFirmSelectionClick = async () => {
+    const { value: fruit } = await Swal.fire({
+      title: "Lọc thương hiệu",
+      input: "select",
+      inputOptions: names,
+      inputPlaceholder: "Chọn thương hiệu xe",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          resolve()
+          const firm = firms.find(x => x.name === value);
+          router.push(`/products?id=${firm.id}&str=${value}`);
+        });
+      }
+    });
+  }
+  const onCartClick = async () => {
+    Swal.fire({
+      title: "Giàu nhỉ ?",
+      text: "Tớ nghĩ cậu không đủ tiền để mua nổi 1 lần 2 chiếc xe đâu !",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Vâng, đúng vậy",
+      cancelButtonText: "Không, tôi nghèo"
+    });
+  }
+
+  useEffect(() => {
+    async function getFirms() {
+      try {
+        const res = await fetch('/api/firms');
+        if(!res.ok) {
+          router.push(`/pages/errors/${res.status}`);
+          return;
+        }
+        const data = await res.json();
+        setFirms(data)
+      } catch (error) {
+        router.push(`/pages/errors/${error.status}`)
+      }
+    }
+    getFirms();
+  }, [])
+
+  useEffect(() => {
+    firms.forEach((x) => {
+      const name = x.name;
+      setNames({[name]: name, ...names});
+    })
+  }, [firms])
 
   return (
     <div>
@@ -31,16 +113,19 @@ export default function LayoutProvider({ children }) {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="me-auto w-100 d-flex justify-content-center" navbar>
               <NavItem>
-                <NavLink className={styles.nav_link} href="/">Giới thiệu</NavLink>
+                <NavLink className={styles.nav_link} href="/pages/reviews">Giới thiệu</NavLink>
               </NavItem>
-               <NavItem>
-                <NavLink className={styles.nav_link} href="/">Trong tầm giá</NavLink>
+              <NavItem>
+                <NavLink className={styles.nav_link} onClick={x => onPriceSelectionClick()}>Trong tầm giá</NavLink>
               </NavItem>
-               <NavItem>
-                <NavLink className={styles.nav_link} href="/">Tên sản phẩm</NavLink>
+              <NavItem>
+                <NavLink className={styles.nav_link} onClick={x => onFirmSelectionClick()}>Tên sản phẩm</NavLink>
               </NavItem>
-               <NavItem>
-                <NavLink className={styles.nav_link} href="/">Giỏ hàng</NavLink>
+              <NavItem>
+                <NavLink className={styles.nav_link} href="#bike_types">Loại xe</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className={styles.nav_link} onClick={(x => onCartClick())}>Giỏ hàng</NavLink>
               </NavItem>
             </Nav>
             {/* <NavbarText>Simple Text</NavbarText> */}

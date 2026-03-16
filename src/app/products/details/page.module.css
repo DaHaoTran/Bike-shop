@@ -1,0 +1,68 @@
+.line {
+    margin-top: 80px;
+}
+
+.color_pickers {
+    position: absolute;
+    left: 8vw;
+    top: 130px;
+    display: grid;
+    justify-content: center;
+}
+
+.details_container {
+    margin: 0px 15vw 200px 15vw;
+}
+
+.image {
+    width: auto;
+    height: auto;
+}
+
+.image_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.title_bikename {
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.title_bikeprice {
+    font-size: 35px;
+}
+
+.title_orderbutton {
+    width: 100%;
+    margin-top: 6.7vw;
+}
+
+.title_headers {
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.meow {
+    opacity: 0;
+    position: absolute;
+    top: 11vw;
+    
+    animation-name: fade;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+}
+
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    } 
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
