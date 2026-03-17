@@ -136,7 +136,7 @@ export default function LayoutProvider({ children }) {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="me-auto w-100 d-flex justify-content-center" navbar>
               <NavItem>
-                <NavLink className={styles.nav_link} onClick={x => onReviewClick}>Giới thiệu</NavLink>
+                <NavLink className={styles.nav_link} onClick={x => onReviewClick()}>Giới thiệu</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className={styles.nav_link} onClick={x => onPriceSelectionClick()}>Trong tầm giá</NavLink>
