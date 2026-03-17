@@ -7,7 +7,7 @@ const postToGGSheets = async (request) => {
         },
         body: request.body
     });
-    return res;
+    return await res.json();
 }
 
 export { postToGGSheets }

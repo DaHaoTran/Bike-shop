@@ -66,9 +66,11 @@ export default function Details() {
                 Swal.fire({
                     title: "Cảm ơn bạn đã đặt hàng",
                     text: "Bên cửa hàng sẽ liên hệ để xác nhận và trao đổi thông tin với quý khách !",
-                    icon: "success"
+                    icon: "success",
+                    didClose: () => {
+                        router.push('/');
+                    }
                 });
-                router.push('/');
             } else {
                 Swal.fire({
                     title: "Xin lỗi vì sự bất tiện này",
@@ -89,17 +91,17 @@ export default function Details() {
 
             const urlInput = prompt('Enter url:');
 
-            const res = await postToGGSheets({url: `${urlInput}`, body: `Bike=${bike.name}&Name=${e.target.name.value}&Phone=${e.target.phone.value}&Address=${e.target.address.value}&Date=${isoString}`});
+            const res = await postToGGSheets({url: `${urlInput.toString()}`, body: `Bike=${bike.name}&Name=${e.target.name.value}&Phone=${e.target.phone.value}&Address=${e.target.address.value}&Date=${isoString}`});
 
             // if(!res.ok) {
             //     isBuyingSubmited = false
             //     return
             // }
-            isBuyingSubmited = true
+            // isBuyingSubmited = true
         } catch {
             // router.push(`/pages/errors/500`);
-            isBuyingSubmited = true
         }
+        isBuyingSubmited = true
     }
 
     useEffect(() => {
