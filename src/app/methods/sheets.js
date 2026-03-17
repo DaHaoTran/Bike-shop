@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 const postToGGSheets = async (body) => {
     // Read the body as text (since you're sending x-www-form-urlencoded)
     const res = await fetch(secrets.NEXT_PUBLIC_SHEETS_URL, {
