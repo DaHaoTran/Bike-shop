@@ -2,8 +2,6 @@
 import path from 'path';
 import fs from "fs";
 
-export const dynamic = "force-static";
-
 const filePathDefault = path.join(process.cwd(), "src", "assets", "jsons");
 
 const getTypeList = async () => {
