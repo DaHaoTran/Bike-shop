@@ -15,13 +15,6 @@ export async function GET(request) {
         const [min, max] = str.match(/\d+/g).map(Number);
         //rest code
         const limit = searchParams.get("limit") == null ? 30 : searchParams.get("limit");
-        const bikes = getBikes().filter(x => {
-            const [left, right] = x.price
-                .split(" - ")                // split into two parts
-                .map(p => parseInt(p));      // parseInt stops at the first dot
-
-            return left >= min && right <= max;
-        });
         if (!bikes) return NextResponse.json({ message: 'Not found' }, { status: 404 });
         return NextResponse.json(bikes.slice(0, limit));
     } catch (error) {

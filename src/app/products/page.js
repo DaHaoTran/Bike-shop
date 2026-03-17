@@ -5,46 +5,46 @@ import Bike from '../components/bike'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { Spinner } from 'reactstrap'
+import { useSelector } from 'react-redux'
 
 function ProductsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const searchStr = searchParams.get("str");
   const id = searchParams.get("id");
-  const [bikes, setBikes] = useState([]);
+  const { bikes } = useSelector(x => x.bike);
+  const [ bikesFilled, setBikesFilled] = useState([]);
 
   useEffect(() => {
     if (!id) return
 
     async function getBikesById() {
+      if(!id) return;
+      if(!bikes) return;
+
       try {
-        const res = await fetch(`/api/bikes/by_types?id=${id}`);
-        const res2 = await fetch(`/api/bikes/by_firms?id=${id}`);
-        if (!res.ok || !res2.ok) {
-          router.push(`/pages/errors/${res.status}`);
-          return
-        }
-        const data = await res.json();
-        const data2 = await res2.json();
-        setBikes([...data, ...data2, ...bikes]);
+        const data = bikes.filter(x => x.typeId === id || x.firmID === id);
+        setBikes([...data, ...bikes]);
       } catch (error) {
         router.push(`/pages/errors/${error.status}`);
       }
     }
     getBikesById();
-  }, [id])
+  }, [id, bikes])
 
   useEffect(() => {
     if(!searchStr) return
     if(!searchStr.includes('from')) return;
     async function getBikesByStr() {
       try {
-        const res = await fetch(`/api/bikes/filters?str=${searchStr}`);
-        if(!res.ok) {
-          router.push(`/pages/errors/${res.status}`);
-          return
-        }
-        const data = await res.json();
+        const [min, max] = searchStr.match(/\d+/g).map(Number);
+        const data = getBikes().filter(x => {
+            const [left, right] = x.price
+                .split(" - ")                // split into two parts
+                .map(p => parseInt(p));      // parseInt stops at the first dot
+
+            return left >= min && right <= max;
+        });
         setBikes([...data, ...bikes]);
       } catch (error) {
         router.push(`/pages/errors/${error.status}`);

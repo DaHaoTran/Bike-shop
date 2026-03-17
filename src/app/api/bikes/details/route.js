@@ -4,7 +4,7 @@ import fs from 'fs';
 
 export const dynamic = "force-static"
 
-const filePath = path.join(process.cwd(), "public", "jsons", "bike_details.json");
+const filePath = path.join(process.cwd(), "public", "jsons", );
 const getDetails = () => JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 export async function GET(request) {

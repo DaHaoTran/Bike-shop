@@ -3,18 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 export const bikeSlice = createSlice({
     name: "bike",
     initialState: {
-        bike: {}
+        details: {},
+        bikes: []
     },
     reducers: {
-        addBike: (state, action) => {
-            state.bike = action.payload;
+        addDetails: (state, action) => {
+            state.details = action.payload;
         },
-        clearBike: (state, action) => {
-            state.bike = {}
+        clearDetails: (state, action) => {
+            state.details = {}
+        },
+        addBikeS: (state, action) => {
+            state.bikes = action.payload;
+        },
+        clearBikes: (state, aciton) => {
+            state.bikes = []
         },
     }
 });
 
-export const { addBike } = bikeSlice.actions;
+export const { addDetails, clearDetails, addBikeS, clearBikes } = bikeSlice.actions;
 
 export default bikeSlice.reducer;
