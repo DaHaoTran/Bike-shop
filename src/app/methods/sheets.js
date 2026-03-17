@@ -1,11 +1,11 @@
-const postToGGSheets = async (res) => {
+const postToGGSheets = async (request) => {
     // Read the body as text (since you're sending x-www-form-urlencoded)
-    const res = await fetch(res.url, {
+    const res = await fetch(request.url, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: res.body
+        body: request.body
     });
     return res;
 }
