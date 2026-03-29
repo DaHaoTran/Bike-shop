@@ -4,7 +4,7 @@ import { Input } from 'reactstrap'
 import botImage from '../../../public/chat_icon.png'
 import Image from 'next/image'
 
-export default function ChatForm() {
+export default function ChatForm({ isVisible }) {
   const botChat = (content) => (
     <div className={styles.bot_chat_part_container}>
       <Image 
@@ -27,6 +27,7 @@ export default function ChatForm() {
     </div>
   )
 
+  if(!isVisible) return null;
   return (
     <>
       <div className={styles.chat_form_container}>
