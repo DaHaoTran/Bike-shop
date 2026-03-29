@@ -1,10 +1,25 @@
-import React from 'react'
+"use client"
+import React, { useEffect } from 'react'
 import styles from './chat_form.module.css'
 import { Input } from 'reactstrap'
 import botImage from '../../../public/chat_icon.png'
 import Image from 'next/image'
+import { animate } from 'animejs'
 
 export default function ChatForm({ isVisible }) {
+  useEffect(() => {
+    if (!isVisible) return
+    
+    animate('#chat-form', {
+      height: {
+        from: '0px',
+        to: '450px'
+      },
+      // rotate: '360deg',
+      duration: 500,
+    });
+  }, [isVisible])
+
   const botChat = (content) => (
     <div className={styles.bot_chat_part_container}>
       <Image 
@@ -30,7 +45,7 @@ export default function ChatForm({ isVisible }) {
   if(!isVisible) return null;
   return (
     <>
-      <div className={styles.chat_form_container}>
+      <div className={styles.chat_form_container} id='chat-form'>
         <div className={styles.chat_form_header}><h3 className='text-center'>CHATBOT</h3></div>
         <div className={styles.chat_form_chat_list}>
           {botChat()}
