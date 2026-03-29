@@ -44,8 +44,11 @@
 .chat_form_chat_list {
     margin: 10px;
     height: 310px;
-    /* get scroll */
+    /* create scroll */
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0048FF rgb(239, 239, 239); /* thumb color, track color */
+
 }
 
 /* Bot chat */
