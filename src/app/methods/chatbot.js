@@ -9,6 +9,9 @@ const generateChatResponse = (message) => {
         message.toLocaleLowerCase().includes('tạm biệt')) res = 'Hẹn gặp lại, cảm ơn bạn đã ghé thăm !'
     else if(message.toLocaleLowerCase().includes('name is') ||
         message.toLocaleLowerCase().includes('tên là')) res = 'Thật là một cái tên rất hay !'
+    else if(message.toLocaleLowerCase().includes('ok') ||
+        message.toLocaleLowerCase().includes('vâng')) res = 'Vâng ạ !'
+
     return res;
 }
 

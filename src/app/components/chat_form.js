@@ -63,6 +63,12 @@ export default function ChatForm({ isVisible }) {
       setIsGenerating(false);
 
       if(createBot) setChatHistory(prev => [...prev, createBot]) 
+
+      // Scroll to bottom of div
+      const chatList = document.querySelector("#chat_history");
+      if(!chatList) return
+      chatList.scrollTop = chatList.scrollHeight;
+
     }, 2000);
   }, [inputChat])
 
@@ -71,7 +77,7 @@ export default function ChatForm({ isVisible }) {
     <>
       <div className={styles.chat_form_container} id='chat-form'>
         <div className={styles.chat_form_header}><h3 className='text-center'>CHATBOT</h3></div>
-        <div className={styles.chat_form_chat_list}>
+        <div className={styles.chat_form_chat_list} id='chat_history'>
           {chatHistory && chatHistory.map((x, index) => (
             <div key={index}>
               {x.role === 'user' ? userChat(x.content) : botChat(x.content)}
