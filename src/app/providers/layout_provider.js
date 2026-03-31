@@ -25,6 +25,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFirmList, getBikeList, getDetailList } from '../methods/list';
 import ChatForm from '../components/chat_form';
 import Loading from '../components/loading';
+import nProgress from 'nprogress';
+import Router from 'next/router';
 
 export default function LayoutProvider({ children }) {
   const router = useRouter();
@@ -39,6 +41,10 @@ export default function LayoutProvider({ children }) {
   const { data: bikeData, error: bikeError, isLoading: bikeLoading } = getBikeList();
   const { data: firmData, error: firmError, isLoading: firmLoading } = getFirmList();
   const { data: detailData, error: detailError, isLoading: detailLoading } = getDetailList();
+
+  Router.events.on('routeChangeStart', () => NProgress.start());
+  Router.events.on('routeChangeComplete', () => NProgress.done());
+  Router.events.on('routeChangeError', () => NProgress.done());
 
   const onPriceSelectionClick = async () => {
     const { value: fruit } = await Swal.fire({
